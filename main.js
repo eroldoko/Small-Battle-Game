@@ -12,6 +12,7 @@ let infoBattle = document.getElementsByClassName('infoBattle')[0];
 let attackBtn = document.getElementsByClassName('btn1')[0];
 let attackBtn2 = document.getElementsByClassName('btn2')[0];
 let winner = document.getElementsByClassName('winner')[0];
+
 winner.style.background = "transparent";
 winner.style.display = "none";
 infoBattle2.style.display = "none"
