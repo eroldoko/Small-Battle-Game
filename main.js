@@ -82,7 +82,7 @@ function CreateOrc() {
 
 let divOrcs = document.getElementsByClassName('orcs')[0];
 
-//attack function for all orcs
+//attack function for all Orcs
 CreateOrc.prototype.attack = function () {
 
   divOrcs.style.right = "60%";
