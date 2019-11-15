@@ -16,6 +16,7 @@ winner.style.background = "transparent";
 winner.style.display = "none";
 infoBattle2.style.display = "none"
 
+//Constructor function for creating soldiers
 function CreateSoldier() {
   this.hp = 1000;
   this.damage = Math.floor(Math.random() * (150 - 100) + 100);
@@ -29,7 +30,8 @@ let divArmy = document.getElementsByClassName('army')[0];
 let arrayOrcs = [];
 let arraySoldiers = [];
 
-CreateSoldier.prototype.attack = function() {
+//attack function for all soldiers
+CreateSoldier.prototype.attack = function () {
   attackBtn.style.display = "none";
   divArmy.style.transition = "left 1s";
   divArmy.style.left = "60%";
@@ -50,7 +52,6 @@ CreateSoldier.prototype.attack = function() {
       clearInterval(loop)
     }
   }
-
   let loop = setInterval(write, 20);
 
   setTimeout(displayButton.bind(null, attackBtn2), 3800)
@@ -61,22 +62,18 @@ CreateSoldier.prototype.attack = function() {
   }
   setTimeout(moveDivArmy, 1500)
 
-  console.log(allOrcs.length);
-  console.log(arrayOrcs.length);
-  console.log(allSoldiers.length);
-  console.log(arraySoldiers.length);
-
 };
 
-CreateSoldier.prototype.bomb = 1;
-
+//Creating Army and Army Grid
 createArmy(800);
 createGrid();
 
+//executing  the attack function from all generated Soldiers, at click Event.
 for (var i = 0; i < allSoldiers.length; i++) {
   attackBtn.addEventListener('click', allSoldiers[i].attack);
 }
 
+//Constructor function for creating Orcs
 function CreateOrc() {
   this.hp = 1000;
   this.damage = Math.floor(Math.random() * (150 - 100) + 100);
@@ -85,7 +82,8 @@ function CreateOrc() {
 
 let divOrcs = document.getElementsByClassName('orcs')[0];
 
-CreateOrc.prototype.attack = function() {
+//attack function for all orcs
+CreateOrc.prototype.attack = function () {
 
   divOrcs.style.right = "60%";
   divOrcs.style.transition = "right 1s";
@@ -119,25 +117,30 @@ CreateOrc.prototype.attack = function() {
   setTimeout(displayButton.bind(null, attackBtn), 3800)
 };
 
+//Creating Orcs and Orcs Grid
 createArmyOrcs(800);
 createGrid2();
 
+//executing  the attack function from all generated Orcs, at click Event.
 for (var j = 0; j < allOrcs.length; j++) {
   attackBtn2.addEventListener('click', allOrcs[j].attack);
 }
 
+//Creating Army, as instances of Constructor function
 function createArmy(num) {
   for (var i = 0; i < num; i++) {
     allSoldiers.push(new CreateSoldier())
   }
 }
 
+//Creating Orcs Army, as instances of Constructor function
 function createArmyOrcs(num) {
   for (var i = 0; i < num; i++) {
     allOrcs.push(new CreateOrc())
   }
 }
 
+//Creating Army Grid
 function createGrid() {
   let text = "";
   for (var i = 0; i < allSoldiers.length; i++) {
@@ -156,6 +159,7 @@ function createGrid() {
   }
 }
 
+//Creating Orcs Grid
 function createGrid2() {
   let text = "";
   for (var i = 0; i < allOrcs.length; i++) {
@@ -164,13 +168,14 @@ function createGrid2() {
   mainDiv2.innerHTML = text;
 
   orcDivs = document.querySelectorAll('.orc');
+
   for (var i = 0; i < orcDivs.length; i++) {
     orcDivs[i].addEventListener('click', displayInfoOrcs);
     orcDivs[i].addEventListener('mouseout', hideInfoOrcs);
-
   }
 }
 
+//battle logic and checking progress
 function battle() {
 
   for (var i = 0; i < allOrcs.length; i++) {
@@ -220,9 +225,8 @@ function battle() {
       }
     }
   }
-
-  
 }
+
 function displayInfoArmy(e) {
 
   let currentSoldier = allSoldiers[this.id];
@@ -275,6 +279,10 @@ function hideInfoOrcs() {
   infoOrc.style.display = "none";
 }
 
+/*
+  Restarting a Game
+  Setting default values
+*/
 function startOver() {
 
   winner.style.display = "none";
@@ -304,6 +312,7 @@ function startOver() {
   attackBtn.style.display = "block";
 }
 
+//displaying Attack button based on game progress
 function displayButton(disBtn) {
   if (arraySoldiers.length == 800 || arrayOrcs.length == 800) {
     attackBtn.style.display = "none";
